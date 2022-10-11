@@ -24,6 +24,22 @@
 #include <inttypes.h>
 #include <unistd.h>
 
+#include <fstream>
+
+#define HBM_MODE_PATH "/sys/class/drm/sde-conn-1-DSI-1/hbm_mode"
+#define HBM_MODE_ON 1
+#define HBM_MODE_OFF 0
+
+namespace {
+
+template <typename T>
+static void set(const std::string& path, const T& value) {
+    std::ofstream file(path);
+    file << value;
+}
+
+}  // anonymous namespace
+
 namespace android {
 namespace hardware {
 namespace biometrics {
@@ -353,12 +369,14 @@ Return<bool> BiometricsFingerprint::isUdfps(uint32_t /* sensorId */) {
 
 Return<void> BiometricsFingerprint::onFingerDown(uint32_t /* x */, uint32_t /* y */,
                                                  float /* minor */, float /* major */) {
+    set(HBM_MODE_PATH, HBM_MODE_ON);
     mDevice->goodixExtCmd(mDevice, 1, 0);
     return Void();
 }
 
 Return<void> BiometricsFingerprint::onFingerUp() {
     mDevice->goodixExtCmd(mDevice, 0, 0);
+    set(HBM_MODE_PATH, HBM_MODE_OFF);
     return Void();
 }
 
