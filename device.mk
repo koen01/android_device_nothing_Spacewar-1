@@ -3,9 +3,12 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 #
+# Platform
+TARGET_BOARD_PLATFORM := lahaina
+BOARD_USES_QCOM_HARDWARE := true
 
-# Installs gsi keys into ramdisk, to boot a GSI with verified boot.
-$(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
+# Kernel headers
+PRODUCT_VENDOR_KERNEL_HEADERS := hardware/qcom-caf/sm8350/kernel-headers
 
 # Setup dalvik vm configs
 $(call inherit-product, frameworks/native/build/phone-xhdpi-6144-dalvik-heap.mk)
@@ -216,6 +219,10 @@ PRODUCT_PACKAGES += \
     android.hardware.gnss.visibility_control@1.0.vendor \
     android.hardware.gnss@2.1.vendor
 
+# HALs
+PRODUCT_USES_QCOM_HARDWARE := true
+PRODUCT_BOARD_PLATFORM := lahaina
+
 # Health
 PRODUCT_PACKAGES += \
     android.hardware.health@2.1-impl \
@@ -257,6 +264,12 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     ipacm \
     IPACM_cfg.xml
+
+# Kernel Binary
+TARGET_KERNEL_DIR ?= device/nothing/spacewar-kernel
+LOCAL_KERNEL := $(TARGET_KERNEL_DIR)/kernel
+
+PRODUCT_COPY_FILES += $(LOCAL_KERNEL):kernel
 
 # Keymaster
 PRODUCT_PACKAGES += \

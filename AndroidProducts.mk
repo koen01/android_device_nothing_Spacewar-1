@@ -1,13 +1,13 @@
 #
-# Copyright (C) 2022 The LineageOS Project
+# Copyright (C) 2022 The crookedOS Project
 #
 # SPDX-License-Identifier: Apache-2.0
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/lineage_Spacewar.mk
+    $(LOCAL_DIR)/crooked_Spacewar.mk
 
 COMMON_LUNCH_CHOICES := \
-    lineage_Spacewar-userdebug \
-    lineage_Spacewar-user \
-    lineage_Spacewar-eng
+    crooked_Spacewar-userdebug \
+    crooked_Spacewar-user \
+    crooked_Spacewar-eng
