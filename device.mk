@@ -4,11 +4,11 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 # Platform
-TARGET_BOARD_PLATFORM := lahaina
-BOARD_USES_QCOM_HARDWARE := true
+PRODUCT_USES_QCOM_HARDWARE := true
+PRODUCT_BOARD_PLATFORM := lahaina
 
 # Kernel headers
-PRODUCT_VENDOR_KERNEL_HEADERS := hardware/qcom-caf/sm8350/kernel-headers
+#PRODUCT_VENDOR_KERNEL_HEADERS := hardware/qcom-caf/sm8350/kernel-headers
 
 # Setup dalvik vm configs
 $(call inherit-product, frameworks/native/build/phone-xhdpi-6144-dalvik-heap.mk)
@@ -263,7 +263,7 @@ PRODUCT_PACKAGES += \
 
 # Kernel Binary
 TARGET_KERNEL_DIR ?= device/nothing/spacewar-kernel
-LOCAL_KERNEL := $(TARGET_KERNEL_DIR)/kernel
+LOCAL_KERNEL := $(TARGET_KERNEL_DIR)/Image
 
 PRODUCT_COPY_FILES += $(LOCAL_KERNEL):kernel
 
@@ -323,8 +323,8 @@ PRODUCT_PACKAGES += \
     android.hardware.power@1.3.vendor
 
 # PowerShare
-PRODUCT_PACKAGES += \
-    vendor.lineage.powershare@1.0-service.nothing
+#PRODUCT_PACKAGES += \
+#    vendor.lineage.powershare@1.0-service.nothing
 
 # QMI
 PRODUCT_PACKAGES += \
